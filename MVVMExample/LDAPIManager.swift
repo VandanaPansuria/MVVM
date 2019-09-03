@@ -7,15 +7,18 @@
 //
 
 import Foundation
+import Alamofire
 import SwiftyJSON
+typealias Taskm8APICompletionHandler = (_ code:Int, _ error:NSError?, _ response:JSON?) -> Void
+
 class LDAPIManager: NSObject {
     
     struct Constants {
-        
+         static let  BASEURL = "http://103.11.119.157:8181"
         //static let  OCR_SERVER_BASE = "http://192.168.1.88:8080"
         static let  OCR_SERVER_BASE = "http://103.11.119.157:8181"
         static let  MRZ_OCR_SERVER = "/mrzGenericOcr"
-        
+       
         //static let IPAddress = "192.168.1.98" //32
         static let IPAddress = "103.11.119.155"
         static let BASEURLTFMCE = "http://" +  IPAddress + "/idm-sample-verify/"
@@ -47,6 +50,69 @@ class LDAPIManager: NSObject {
         
     }
     static var sharedInstance: LDAPIManager = LDAPIManager()
+    class func callApi(_ strApiName:String,
+                       param : [String : AnyObject],
+                       method: HTTPMethod,
+                       header:[String : String]?,
+                       encodeType:URLEncoding,
+                       completionHandler:@escaping Taskm8APICompletionHandler){
+        
+        if LDAppSingleton.isNetworkAvailable(){
+            
+            LDAppSingleton.startNVActivity()
+            
+            
+            ///******///
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                var aindex = 0
+                if fromsettings == true{
+                    multipartFormData.append(avatarimg.jpegData(compressionQuality: 1.0)! , withName: "avatar", mimeType: "image/jpg")
+                }else{
+                    for imageDic in ImageArray
+                    {
+                        print("beforimage[\(aindex)]")
+                        multipartFormData.append(imageDic.jpegData(compressionQuality: 1.0)! , withName: "beforimage[\(aindex)]", mimeType: "image/jpg")
+                        aindex = aindex + 1
+                        //  MultipartFormData.append(imageDic.jpegData(compressionQuality: 1.0) , withName: "beforimage" ,fileName: "file.jpg", mimeType: "image/jpg")
+                        
+                    }
+                }
+                
+                for (key, value) in param {
+                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+                }
+            }, usingThreshold: UInt64.init(), to: strApiName, method: method, headers: header) { (result) in
+                switch result{
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        LDAppSingleton.stopNVActivity()
+                        if response.result.isSuccess {
+                            let jsonObject = JSON(response.result.value!)
+                            completionHandler(1, nil, jsonObject)
+                        }
+                        else{
+                            let error = response.result.error! as NSError
+                            completionHandler(0, error, nil)
+                        }
+                    }
+                case .failure(let encodingError):
+                    print("Error in upload: \(encodingError.localizedDescription)")
+                    LDAppSingleton.stopNVActivity()
+                    
+                    // print(encodingError)
+                    let error = encodingError as NSError
+                    completionHandler(0, error, nil)
+                }
+                
+            }
+            
+        }else{
+            LDAppSingleton.stopNVActivity()
+            //LDAppSingleton.showMeTheAlert(Constant.AlertMessage.kAlertMsgNoInternet)
+            LDAppSingleton.showAlert("TaskM8", Constant.AlertMessage.kAlertMsgNoInternet)
+        }
+    }
+    
 }
 class dictViewModel {
 
@@ -78,3 +144,48 @@ class dataViewModel {
         self.profile = profile
     }
 }
+enum Response : Int{
+    
+    case success = 200
+    case failure = 400
+    
+}
+
+enum API {
+    
+   
+    case categorylist
+ 
+    func requestString() -> String {
+        
+        switch self
+        {
+            
+        
+        case .categorylist:
+            return LDAPIManager.Constants.BASEURL + Constant.ApiNames.Vcategorylist
+       
+        }
+    }
+}
+enum APIParameter {
+    
+    
+   
+    case logindata(email: String,password : String)
+   
+    func dictionary() -> Dictionary<String, AnyObject> {
+        
+        switch self {
+     
+        case .logindata(email: let email , password : let password):
+            var requestDictionary : Dictionary<String,String> = Dictionary()
+            
+            requestDictionary[Constant.StaticNameOfVariable.Vemail]   = email;
+            requestDictionary[Constant.StaticNameOfVariable.Vpassword]   = password;
+            return requestDictionary as Dictionary<String, AnyObject>
+     
+        }
+    }
+}
+

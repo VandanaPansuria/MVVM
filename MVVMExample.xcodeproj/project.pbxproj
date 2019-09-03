@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4CE8B2D3BCE153C2625F62CA /* Pods_MVVMExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B954CF14B5B0E429383FE9B /* Pods_MVVMExample.framework */; };
+		8EF782DF231E75D300BD299A /* Categorylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF782DE231E75D300BD299A /* Categorylist.swift */; };
+		8EF782E1231E75FC00BD299A /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF782E0231E75FC00BD299A /* Constant.swift */; };
+		8EF782E3231E765D00BD299A /* CategoryListHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF782E2231E765D00BD299A /* CategoryListHandler.swift */; };
+		8EF782E5231E775700BD299A /* LDAppSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF782E4231E775700BD299A /* LDAppSingleton.swift */; };
 		C3A73A6F230E9A370053FAA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A73A6E230E9A370053FAA2 /* AppDelegate.swift */; };
 		C3A73A71230E9A370053FAA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A73A70230E9A370053FAA2 /* ViewController.swift */; };
 		C3A73A74230E9A370053FAA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3A73A72230E9A370053FAA2 /* Main.storyboard */; };
@@ -21,6 +25,10 @@
 /* Begin PBXFileReference section */
 		02F36A729541E16ED806F55D /* Pods-MVVMExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMExample.release.xcconfig"; path = "Target Support Files/Pods-MVVMExample/Pods-MVVMExample.release.xcconfig"; sourceTree = "<group>"; };
 		0F334ED836C15C28561FB453 /* Pods-MVVMExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMExample.debug.xcconfig"; path = "Target Support Files/Pods-MVVMExample/Pods-MVVMExample.debug.xcconfig"; sourceTree = "<group>"; };
+		8EF782DE231E75D300BD299A /* Categorylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categorylist.swift; sourceTree = "<group>"; };
+		8EF782E0231E75FC00BD299A /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		8EF782E2231E765D00BD299A /* CategoryListHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListHandler.swift; sourceTree = "<group>"; };
+		8EF782E4231E775700BD299A /* LDAppSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LDAppSingleton.swift; sourceTree = "<group>"; };
 		9B954CF14B5B0E429383FE9B /* Pods_MVVMExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVVMExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A73A6B230E9A370053FAA2 /* MVVMExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVVMExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A73A6E230E9A370053FAA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +92,11 @@
 		C3A73A6D230E9A370053FAA2 /* MVVMExample */ = {
 			isa = PBXGroup;
 			children = (
+				C3A73A82230E9C920053FAA2 /* LDAPIManager.swift */,
+				8EF782E4231E775700BD299A /* LDAppSingleton.swift */,
+				8EF782E2231E765D00BD299A /* CategoryListHandler.swift */,
+				8EF782E0231E75FC00BD299A /* Constant.swift */,
+				8EF782DE231E75D300BD299A /* Categorylist.swift */,
 				C3A73A80230E9C0C0053FAA2 /* AuthorizedHandler.swift */,
 				C3A73A6E230E9A370053FAA2 /* AppDelegate.swift */,
 				C3A73A70230E9A370053FAA2 /* ViewController.swift */,
@@ -91,7 +104,6 @@
 				C3A73A75230E9A410053FAA2 /* Assets.xcassets */,
 				C3A73A77230E9A410053FAA2 /* LaunchScreen.storyboard */,
 				C3A73A7A230E9A410053FAA2 /* Info.plist */,
-				C3A73A82230E9C920053FAA2 /* LDAPIManager.swift */,
 				C3A73A84230EB5640053FAA2 /* cast.swift */,
 			);
 			path = MVVMExample;
@@ -212,8 +224,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EF782E1231E75FC00BD299A /* Constant.swift in Sources */,
+				8EF782E5231E775700BD299A /* LDAppSingleton.swift in Sources */,
 				C3A73A71230E9A370053FAA2 /* ViewController.swift in Sources */,
+				8EF782DF231E75D300BD299A /* Categorylist.swift in Sources */,
 				C3A73A6F230E9A370053FAA2 /* AppDelegate.swift in Sources */,
+				8EF782E3231E765D00BD299A /* CategoryListHandler.swift in Sources */,
 				C3A73A83230E9C920053FAA2 /* LDAPIManager.swift in Sources */,
 				C3A73A85230EB5640053FAA2 /* cast.swift in Sources */,
 				C3A73A81230E9C0C0053FAA2 /* AuthorizedHandler.swift in Sources */,
